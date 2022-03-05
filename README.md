@@ -7,12 +7,44 @@
 
 ![Перекодировка файлов](screenshots/recoder3_tab_fc.png)
 
-## Установка
+## Запуск из исходного кода
+
+Установите пакет виртуального окружения python-venv (не ниже версии 3.8):
+
+```bash
+apt install python3.8-venv
+```
+
+Склонируйте репозиторий, разверните виртуальное окружение и установите дополнительные
+пакеты:
+
+```bash
+git clone https://github.com/anton-pribora/py-recoder.git recoder
+cd recoder
+python3 -m venv venv
+./venv/bin/pip install tkinterdnd2
+```
+
+Теперь приложение можно запустить с помощью команды:
+
+```bash
+./venv/bin/python3 main_tk.py
+```
 
 ## Компиляция
 
 Для сборки проекта в исполняемый файл перейдите в директорию проекта и выполните:
 
+Установите сборщик приложения:
+
 ```bash
-./venv/bin/pyinstaller -F -n recoder main_tk.py --collect-all tkinterdnd2
+./venv/bin/pip install pyinstaller
 ```
+
+Скомпилируйте исполняемый файл:
+
+```bash
+./venv/bin/pyinstaller -F -n recoder-v3-0-0 main_tk.py --collect-all tkinterdnd2
+```
+
+Если компиляция завершилась без ошибок, исполняемый файл будет доступен в папке `dist`.
