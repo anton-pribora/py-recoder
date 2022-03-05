@@ -67,7 +67,7 @@ class Recoder:
         :param text: Данные для лога
         :return:
         """
-        with open(self.log_file, 'at') as log:
+        with open(self.log_file, 'at', encoding='utf-8', errors='replace', newline='') as log:
             log.write(text + os.linesep)
 
     def convert_file(self, enc_from, enc_to, file_path, save_origin, origin_ext, progress_callback):
