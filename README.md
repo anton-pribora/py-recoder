@@ -44,7 +44,7 @@ python3 -m venv venv
 Скомпилируйте исполняемый файл:
 
 ```bash
-./venv/bin/pyinstaller -F -n recoder-v3-0-0 main_tk.py --collect-all tkinterdnd2
+./venv/bin/pyinstaller -F -n recoder-v3-0-0 main_tk.py --collect-all tkinterdnd2 --windowed
 ```
 
 Если компиляция завершилась без ошибок, исполняемый файл будет доступен в папке `dist`.
