@@ -45,25 +45,25 @@ class Gui(TkinterDnD.Tk):
     def __init_tab1(self):
         tab = tk.Frame(self.tabs)
         tab.pack(fill='both', expand=1)
-        self.tabs.add(tab, text="Перекодировать текст", padding=10)
+        self.tabs.add(tab, text="Перекодировать текст")
         tk_recoder.tab_text_converter.init_frame(self, tab)
 
     # Перекодировать файлы
     def __init_tab2(self):
         tab = ttk.Frame(self.tabs)
         tab.pack(fill='both', expand=1)
-        self.tabs.add(tab, text="Перекодировать файлы", padding=10)
+        self.tabs.add(tab, text="Перекодировать файлы")
         tk_recoder.tab_files_converter.init_frame(self, tab)
 
     def __init_tab3(self):
         tab = ttk.Frame(self.tabs)
         tab.pack(fill='both', expand=1)
-        self.tabs.add(tab, text="Убрать BOM", padding=10)
+        self.tabs.add(tab, text="Убрать BOM")
         tk_recoder.tab_bom_remover.init_frame(self, tab)
 
     # О программе
     def __init_tab4(self):
         tab = ttk.Frame(self.tabs)
         tab.pack(fill='both', expand=1)
-        self.tabs.add(tab, text="О программе", padding=10)
+        self.tabs.add(tab, text="О программе")
         tk_recoder.tab_about.init_frame(self, tab)

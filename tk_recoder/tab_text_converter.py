@@ -18,11 +18,11 @@ def init_frame(self, frame: tk.Frame):
     :return: None
     """
     buttons = tk.Frame(frame)
-    buttons.pack(fill='x')
+    buttons.pack(fill='x', padx=10, pady=(10, 0))
     buttons.columnconfigure(5, weight=1)
 
     texts = tk.Frame(frame)
-    texts.pack(fill='both', expand=1, pady=(10, 0))
+    texts.pack(fill='both', expand=1, pady=(10, 0), padx=10)
 
     self.tc_text_from = st.ScrolledText(texts, width=30, height=3)
     self.tc_text_from.pack(side='left', expand=1, fill='both', padx=(0, 2))

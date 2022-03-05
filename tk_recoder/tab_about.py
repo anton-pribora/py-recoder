@@ -17,7 +17,7 @@ def init_frame(self, frame: tk.Frame):
     """
 
     labels = tk.Frame(frame)
-    labels.pack(expand=1, fill='both', pady=10)
+    labels.pack(expand=1, fill='both', pady=10, padx=10)
 
     urls = {
         'Сайт': 'https://anton-pribora.ru/recoder/',

@@ -24,7 +24,7 @@ def init_frame(self, frame: tk.Frame):
     # Основной контейнер для формы поиска
     # ------------------------
     search_form = tk.Frame(frame)
-    search_form.pack(fill='x')
+    search_form.pack(fill='x', padx=10, pady=(10, 0))
 
     tk.Label(search_form, text='Путь поиска').grid(column=0, row=0, sticky='e')
     tk.Label(search_form, text='Маска').grid(column=0, row=1, sticky='e')
@@ -124,7 +124,7 @@ def init_frame(self, frame: tk.Frame):
     # Фрейм "обработка файлов"
     # ------------------------
     handle_files = ttk.LabelFrame(frame, text='Обработка файлов', padding=(10, 5, 10, 10))
-    handle_files.pack(fill='both', expand=1, pady=(5, 0))
+    handle_files.pack(fill='both', expand=1, pady=(5, 10), padx=10)
 
     buttons_bar1 = tk.Frame(handle_files)
     buttons_bar1.pack(fill='x')
