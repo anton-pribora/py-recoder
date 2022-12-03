@@ -120,9 +120,9 @@ def init_frame(self, frame: tk.Frame):
 
                 if not self.fc_working:
                     break
-        else:
+        elif os.path.isdir(folder):
+            self.update_status('Поиск в {folder}'.format(folder=folder))
             for item in os.listdir(folder):
-                self.update_status('Поиск в {folder}'.format(folder=folder))
                 path = os.path.join(folder, item)
 
                 if os.path.isfile(path) and (mask == '' or fnmatch.fnmatch(item, mask)):
