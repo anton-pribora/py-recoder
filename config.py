@@ -32,7 +32,8 @@ config['files_converter'] = {
     'enc_from': 'windows-1251',
     'enc_to': 'UTF-8',
     'save_origin': True,
-    'origin_ext': '~'
+    'origin_ext': '~',
+    'search_in_subdirectories': True
 }
 
 config['bom_remover'] = {

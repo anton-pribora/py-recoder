@@ -42,7 +42,7 @@ class Recoder:
 
         :returns: текущая версия перекодировщика
         """
-        return 'Recoder v3.0.0'
+        return 'Recoder v3.1.0'
 
     def convert_text(self, enc_from, enc_to, text):
         """

@@ -12,7 +12,7 @@
 Установите пакет виртуального окружения python-venv (не ниже версии 3.8):
 
 ```bash
-apt install python3.8-venv
+apt install python3-venv python3-tk
 ```
 
 Склонируйте репозиторий, разверните виртуальное окружение и установите дополнительные
@@ -35,8 +35,6 @@ python3 -m venv venv
 
 Для сборки проекта в исполняемый файл перейдите в директорию проекта и выполните:
 
-Установите сборщик приложения:
-
 ```bash
 ./venv/bin/pip install pyinstaller
 ```
@@ -44,7 +42,10 @@ python3 -m venv venv
 Скомпилируйте исполняемый файл:
 
 ```bash
-./venv/bin/pyinstaller -F -n recoder-v3-0-0 main_tk.py --collect-all tkinterdnd2 --windowed
+./venv/bin/pyinstaller -F -n recoder-v3-1-0 main_tk.py --collect-all tkinterdnd2 --windowed
 ```
 
 Если компиляция завершилась без ошибок, исполняемый файл будет доступен в папке `dist`.
+
+Некоторые антивирусы (например, VirusTotal) могут показывать наличие вирусов. Это связано с использованием PyInstaller и
+его модулей. Если это является проблемой, то проект можно запускать из исходного кода.

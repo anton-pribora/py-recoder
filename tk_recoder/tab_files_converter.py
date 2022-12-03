@@ -55,10 +55,23 @@ def init_frame(self, frame: tk.Frame):
     self.fc_mask.bind('<Return>', lambda *args: find_files())
     self.fc_mask.bind('<KP_Enter>', lambda *args: find_files())
 
+    # Галочка "искать в подкаталогах"
+    # ------------------------
+    def update_search_in_subdirectories(*args):
+        config['search_in_subdirectories'] = str(fc_search_in_subdirectories_var.get())
+
+    fc_search_in_subdirectories_var = tk.BooleanVar(value=config['search_in_subdirectories'].lower() in ['true', '1'])
+    fc_search_in_subdirectories_var.trace('w', update_search_in_subdirectories)
+
+    self.fc_search_in_subdirectories = tk.Checkbutton(search_form, variable=fc_search_in_subdirectories_var,
+                                                      text='Искать в подкаталогах')
+    self.fc_search_in_subdirectories.grid(column=1, row=2, sticky='w')
+
     self.fc_working = False
 
     def disable_controls(disabled: bool):
         """Отключение кнопок в зависимости от текущего состояния"""
+        self.fc_search_in_subdirectories.configure(state=('normal', 'disabled')[disabled])
         self.fc_mask.configure(state=('normal', 'disabled')[disabled])
         self.fc_path.configure(state=('normal', 'disabled')[disabled])
         self.fc_button_opendir.configure(state=('normal', 'disabled')[disabled])
@@ -81,29 +94,42 @@ def init_frame(self, frame: tk.Frame):
 
     def find_files(folder=None):
         """Поиск файлов в каталоге и его подкаталогах по маске"""
-        found = 0
+        folder = folder or self.fc_path.get()
+        found = tk.IntVar(value=0)
         current_list = list(self.fc_files.get(0, tk.END))
         disable_controls(True)
         mask = self.fc_mask.get()
+        recursively = fc_search_in_subdirectories_var.get()
 
-        for root, dirs, files in os.walk(folder or self.fc_path.get(), topdown=False):
-            self.update_status('Поиск в {folder}'.format(folder=root))
+        def add_path(fullpath):
+            if fullpath not in current_list:
+                found.set(found.get() + 1)
+                self.fc_files.insert(tk.END, fullpath)
+                self.update_status('Добавлен файл: {path}'.format(path=fullpath))
+            else:
+                self.update_status('Пропущен файл: {path}'.format(path=fullpath))
 
-            for name in files:
-                if mask == '' or fnmatch.fnmatch(name, mask):
-                    path = os.path.join(root, name)
-                    if path not in current_list:
-                        found += 1
-                        self.fc_files.insert(tk.END, path)
-                        self.update_status('Добавлен файл: {path}'.format(path=path))
-                    else:
-                        self.update_status('Пропущен файл: {path}'.format(path=path))
+        if recursively:
+            for root, dirs, files in os.walk(folder, topdown=False):
+                self.update_status('Поиск в {folder}'.format(folder=root))
 
-            if not self.fc_working:
-                break
+                for name in files:
+                    if mask == '' or fnmatch.fnmatch(name, mask):
+                        path = os.path.join(root, name)
+                        add_path(path)
+
+                if not self.fc_working:
+                    break
+        else:
+            for item in os.listdir(folder):
+                self.update_status('Поиск в {folder}'.format(folder=folder))
+                path = os.path.join(folder, item)
+
+                if os.path.isfile(path) and (mask == '' or fnmatch.fnmatch(item, mask)):
+                    add_path(path)
 
         disable_controls(False)
-        self.update_status('Добавлено файлов: {found}'.format(found=found))
+        self.update_status('Добавлено файлов: {found}'.format(found=found.get()))
 
     # Выбор исходной папки
     # ------------------------
